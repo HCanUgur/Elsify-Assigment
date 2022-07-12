@@ -1,12 +1,11 @@
 package com.assigment.employeemanagementsystem.service;
 
-import java.util.List;
-
 import com.assigment.employeemanagementsystem.domain.Employee;
+import com.assigment.employeemanagementsystem.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.assigment.employeemanagementsystem.repository.EmployeeRepository;
+import java.util.List;
 
 @Service // This means that this class is a service
 public class EmployeeService {
@@ -41,9 +40,9 @@ public class EmployeeService {
 	}
 
 	//	delete employee by id
-	public String deleteEmployeeById(Long id) {
+	public String deleteEmployeeById(int id) {
 		//		find an employee by id
-		Employee emp = employeeRepository.getById(id);
+		Employee emp = employeeRepository.getById((long) id);
 
 		//		if there is not an employee who has the id, throw the error.
 		if (emp == null) {
@@ -51,7 +50,7 @@ public class EmployeeService {
 		}
 
 		//		delete an employee who has the id from the database
-		employeeRepository.deleteById(id);
+		employeeRepository.deleteById((long) id);
 		return "Deleted: " + emp.getFirstName() + " " + emp.getLastName();
 	}
 }
